@@ -1,0 +1,249 @@
+<!Doctype html>
+
+<html>
+    
+    <head>
+        <style>
+           
+            body {
+                margin:0;
+                padding:0;
+            }
+         
+            .cell{
+                padding:0.5%;
+                /*border:1px solid #ccc;*/
+                text-align:center;
+            }
+            
+            button{
+                width:100%;
+            }
+            
+            table{
+                border-spacing:0;
+            }
+            tr,td{
+                margin:0;
+                border:0;
+            }
+            .key {
+                background-image: -ms-radial-gradient(center, ellipse farthest-corner, #BDBDBD 0%, #848484 100%);
+                background-image: -moz-radial-gradient(center, ellipse farthest-corner, #BDBDBD 0%, #848484 100%);
+                background-image: -o-radial-gradient(center, ellipse farthest-corner, #BDBDBD 0%, #848484 100%);
+                background-image: -webkit-gradient(radial, center center, 0, center center, 505, color-stop(0, #BDBDBD), color-stop(1, #848484));
+                background-image: -webkit-radial-gradient(center, ellipse farthest-corner, #BDBDBD 0%, #848484 100%);
+                background-image: radial-gradient(ellipse farthest-corner at center, #BDBDBD 0%, #848484 100%);
+                vertical-align:middle;
+                text-align:center;
+                cursor:pointer;
+                cursor:hand;
+            }
+        </style>
+    </head>
+
+    <body onload="test()">
+        <table width="100%" id="layout" style="display:none">
+            <tr>
+                <td>
+                    <table id="layout" width="100%">
+                        <tr>
+                            <td width="16.66%" class="cell">
+                               <div class="key">
+                                   7
+                               </div>
+                            </td>
+                            <td width="16.66%" class="cell">
+                                <div class="key">
+                                   8
+                               </div>
+                            </td>
+                            <td width="16.66%" class="cell">
+                                <div class="key">
+                                   9
+                               </div>
+                            </td>
+                            <td width="16.66%" class="cell">
+                                <div class="key">
+                                   /
+                               </div>
+                            </td>
+                            <td width="16.66%" class="cell">
+                                <div class="key">
+                                   CE
+                               </div>
+                            </td>
+                            <td width="16.66%" class="cell">
+                                <div class="key">
+                                   C
+                               </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        
+            <tr>
+                <td>
+                    <table width="100%">
+                        <tr>
+                            <td width="16.66%" class="cell">
+                                <div class="key">
+                                   4
+                               </div>
+                            </td>
+                            <td width="16.66%" class="cell">
+                                <div class="key">
+                                   5
+                               </div>
+                            </td>
+                            <td width="16.66%" class="cell">
+                                <div class="key">
+                                   6
+                               </div>
+                            </td>
+                            <td width="16.66%" class="cell">
+                                <div class="key">
+                                   X
+                               </div>
+                            </td>
+                            <td width="16.66%" class="cell">
+                                <div class="key">
+                                   (
+                               </div>
+                            </td>
+                            <td width="16.66%" class="cell">
+                                <div class="key">
+                                   )
+                               </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>        
+            
+            <tr>
+                <td>
+                    <table width="100%">
+                        <tr>
+                            <td width="16.66%" class="cell">
+                                <div class="key">
+                                   1
+                               </div>
+                            </td>
+                            <td width="16.66%" class="cell">
+                                <div class="key">
+                                   2
+                               </div>
+                            </td>
+                            <td width="16.66%" class="cell">
+                                <div class="key">
+                                   3
+                               </div>
+                            </td>
+                            <td width="16.66%" class="cell">
+                                <div class="key">
+                                   -
+                               </div>
+                            </td>
+                            <td width="16.66%" class="cell">
+                                <div class="key">
+                                   Square
+                               </div>
+                            </td>
+                            <td width="16.66%" class="cell">
+                                <div class="key">
+                                   Root
+                               </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        
+            <tr>
+                <td>
+                    <table width="100%">
+                        <tr>
+                            <td width="16.66%" class="cell">
+                                
+                                <div class="key">0</div>
+                            </td>
+                            <td width="16.66%" class="cell">
+                                <div class="key">.</div>
+                            </td>
+                            <td width="16.66%" class="cell">
+                                <div class="key">%</div>
+                            </td>
+                            <td width="16.66%" class="cell">
+                                <div class="key">+</div>
+                            </td>
+                            <td width="33.3%" class="cell">
+                                <div class="key">=</div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        
+        <style>
+            .newcell {
+                float:left;
+                margin:0;
+                
+                border:1px solid #ddd;
+                font-size:0;
+            }
+            
+        </style>
+        
+        <div id="container" style="width:100%;overflow:hidden">
+            <div class="newcell"></div> 
+            <div class="newcell"></div>
+            <div class="newcell"></div>
+            
+            <div class="newcell"></div>
+            <div class="newcell"></div>
+            <div class="newcell"></div>
+            
+            <div class="newcell"></div>
+            <div class="newcell"></div>
+            <div class="newcell"></div>
+        </div>
+        
+        <script>
+            function test(){
+                var tab = document.getElementById('layout');
+                
+                var height = window.innerHeight;
+                
+                var eachRowHeight = height / tab.rows.length;
+                
+                tab.rows[0].height = eachRowHeight;
+                
+                var myObj = document.getElementsByClassName('key');
+                for(var i=0; i<myObj.length; i++){
+                   // console.log(i,myObj[i],eachRowHeight);
+                    myObj[i].style.height = eachRowHeight + "px";
+                    myObj[i].style.lineHeight = eachRowHeight + "px";
+                }
+                
+                // we know its 3 X 3
+                
+                height = window.innerHeight / 3;
+                var width = (window.innerWidth ) / 3;
+                
+                var divObj = document.getElementsByClassName('newcell');
+                
+                for(i=0; i<divObj.length;i++){
+                    console.log(i)
+                    divObj[i].style.height = height -2 + 'px';
+                    divObj[i].style.width = width - 2 + 'px';
+                }
+                
+            }
+        </script>        
+    </body>
+</html>
+

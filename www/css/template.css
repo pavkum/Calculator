@@ -1,0 +1,46 @@
+.cell {
+    float:left;
+    margin:0;
+    padding:0;
+    
+}
+
+.key {
+    padding:0px;
+    border:1px solid white;
+    background:#2c3e50;
+    text-align:center;
+    background:#2c3e50;
+    color:#ecf0f1;
+    cursor:pointer;
+    cursor:hand;
+    font-weight:bold;
+    font-size:20px;
+    /*background-image: -ms-radial-gradient(center, ellipse farthest-corner, #BDBDBD 0%, #848484 100%);
+    background-image: -moz-radial-gradient(center, ellipse farthest-corner, #BDBDBD 0%, #848484 100%);
+    background-image: -o-radial-gradient(center, ellipse farthest-corner, #BDBDBD 0%, #848484 100%);
+    background-image: -webkit-gradient(radial, center center, 0, center center, 505, color-stop(0, #BDBDBD), color-stop(1, #848484));
+    background-image: -webkit-radial-gradient(center, ellipse farthest-corner, #BDBDBD 0%, #848484 100%);
+    background-image: radial-gradient(ellipse farthest-corner at center, #BDBDBD 0%, #848484 100%);*/
+}
+
+.key:focus {
+    outline:none;   
+}
+
+.key1 {
+    margin:0;
+    border:1px solid #96CB77;
+    /*border-radius:10px;*/
+    color:#70A353;
+    background:#E3F2DB;
+    vertical-align:middle;
+}
+
+sup, sub {
+   vertical-align: baseline;
+   position: relative;
+   top: -0.4em;
+}
+
+

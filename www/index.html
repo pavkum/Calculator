@@ -1,0 +1,56 @@
+<!Doctype html>
+<html>
+    
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" href="css/calc.css" />
+        <script src="js/jquery.js"></script>
+    </head>
+    
+    <body>
+        
+        <div class="container">
+            <div class="header">
+                Calculator
+            </div>
+            <div class="display">
+                <div id="mainDisplay"></div>
+            </div>
+            <div class="keypad">
+                <div class="controls">
+                    <div class="cell" data-cell-width="1.5" style="width:25%">
+                        <div class="key controlKeys">
+                            Copy
+                        </div>
+                    </div>
+                    <div class="cell" data-cell-width="1.5" style="width:25%">
+                        <div class="key controlKeys">
+                            Paste
+                        </div>
+                    </div>
+                    <div class="cell" data-cell-width="3"  style="width:50%">
+                        <div class="key controlKeys">
+                            History
+                        </div>
+                    </div>
+                    
+                </div>
+                <div id="keypad"></div>
+            </div>
+        </div>
+        
+        
+            <script type="text/javascript" src="cordova.js"></script>
+            <script type="text/javascript" src="js/stack.js"></script>
+            <script type="text/javascript" src="js/display.js"></script>
+            <script type="text/javascript" src="js/expressionManager.js"></script>
+            <script type="text/javascript" src="js/bodmosExpression.js"></script>
+            <script type="text/javascript" src="js/key.js"></script>
+            <script type="text/javascript" src="js/modes.js"></script>
+            <script type="text/javascript" src="js/calc.js"></script>
+    </body>
+
+</html>
