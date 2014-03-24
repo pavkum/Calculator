@@ -1,3 +1,52 @@
+var display = (function (){
+    var mainDisplay = $('#mainDisplay');
+    
+    var scrollLeft = $('#scrollLeft');
+    var scrollRight = $('#scrollRight');
+    
+    var displayScrollWidth = 0;
+    
+    var show = function (data) {
+        mainDisplay.text(data);  
+        updateScroll();
+    };
+    
+    var updateScroll = function () {
+        var curWidth = mainDisplay.prop('scrollWidth');
+        
+        if(curWidth > displayScrollWidth){
+            var scrollLeft = mainDisplay.scrollLeft();
+            mainDisplay.scrollLeft(curWidth - displayScrollWidth);
+        }
+    };
+    
+    var clear = function () {
+        show(0);   
+    };
+    
+    $('body').on('displayReady' , function (){
+        var displayEvent = $.Event('display');
+        displayScrollWidth = mainDisplay.prop('scrollWidth');
+        
+        clear();
+        
+        
+        $('body').on('display',function(e,displayType,data){
+            show(data);
+            // display type is advaced. Will implement later
+        });
+        
+        mainDisplay.on('scroll',function (event){
+            debugger;
+        });
+        
+        
+        
+    });
+    
+})();
+
+/*
 var display = function () {
     this.mainDisplay = $('#mainDisplay');
     this.auxilaryDisplay = $('#auxilaryDisplay');
@@ -31,7 +80,7 @@ display.prototype.clearAuxilaryDisplay = function () {
 };
 
 
-/*
+
 $(document).ready(function(){
     var disp = new display();
 
@@ -45,6 +94,8 @@ $(document).ready(function(){
         }
     });    
     
+    
+    
 });
-
 */
+

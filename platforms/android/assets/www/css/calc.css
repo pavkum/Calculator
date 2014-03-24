@@ -1,3 +1,6 @@
+/***** BLUE Keypad Skin *****/
+
+
 body{
     margin:0;
     padding:0;
@@ -21,19 +24,17 @@ body{
 
 .display {
     padding:0;
-    //border:1px solid #7f8c8d;      
-    //background:#7f8c8d;
 }
 
 #mainDisplay {
-    padding:0 2%;
+    padding:0 5%;
     background:white;  
     text-align:right;
     /*height:15%;
     line-height:15%;*/
     font-size: 2 em;
     color:#22313F;
-        
+    overflow-x:scroll;
 }
 
 .keypad {
@@ -96,6 +97,28 @@ sup, sub {
    top: -0.4em;
 }
 
+.historyItem {
+    /*width:50%;*/
+    /*display:none;*/
+    float:left;
+    border:0;
+    border-right:1px solid white;
+    border-top:1px solid white;
+}
+
+.historyItem div {
+    float:left;
+}
+
+.expression {
+    padding:0 5%;
+    width:50%;
+    text-align:left;
+}
+
+.historyItem:last-child {
+    width:40%;   
+}
 
 
 

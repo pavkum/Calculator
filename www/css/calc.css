@@ -24,22 +24,30 @@ body{
 
 .display {
     padding:0;
-    //border:1px solid #7f8c8d;      
-    //background:#7f8c8d;
+    max-width:100%;
+        
+}
+
+#scroll, #auxilary {
+    margin:0 5%;
 }
 
 #mainDisplay {
-    padding:0 2%;
+    margin:0 5%;
+    max-width:90%;
     background:white;  
     text-align:right;
     /*height:15%;
     line-height:15%;*/
     font-size: 2 em;
     color:#22313F;
+    border:1px solid red;
         
 }
 
 .keypad {
+    margin:0 auto;
+        
     padding: 0px;
 }
 
@@ -99,6 +107,28 @@ sup, sub {
    top: -0.4em;
 }
 
+.historyItem {
+    /*width:50%;*/
+    /*display:none;*/
+    float:left;
+    border:0;
+    border-right:1px solid white;
+    border-top:1px solid white;
+}
+
+.historyItem div {
+    float:left;
+}
+
+.expression {
+    padding:0 5%;
+    width:50%;
+    text-align:left;
+}
+
+.historyItem:last-child {
+    width:40%;   
+}
 
 
 

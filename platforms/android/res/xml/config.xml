@@ -4,7 +4,9 @@
     <feature name="App">
         <param name="android-package" value="org.apache.cordova.App" />
     </feature>
-    <preference name="orientation" value="portrait" />
+    <feature name="Clipboard">
+        <param name="android-package" value="com.verso.cordova.clipboard.Clipboard" />
+    </feature>
     <name>Calculator</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.

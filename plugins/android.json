@@ -3,7 +3,20 @@
         "installed": [],
         "uninstalled": []
     },
-    "config_munge": {},
-    "installed_plugins": {},
+    "config_munge": {
+        "res/xml/config.xml": {
+            "/*": {
+                "<feature name=\"Clipboard\"><param name=\"android-package\" value=\"com.verso.cordova.clipboard.Clipboard\" /></feature>": 1
+            }
+        }
+    },
+    "installed_plugins": {
+        "com.verso.cordova.clipboard": {
+            "PACKAGE_NAME": "com.pavan.calculator"
+        },
+        "org.apache.cordova.console": {
+            "PACKAGE_NAME": "com.pavan.calculator"
+        }
+    },
     "dependent_plugins": {}
 }

@@ -1,3 +1,28 @@
+var display = (function (){
+    var mainDisplay = $('#mainDisplay');
+    
+    var show = function (data) {
+        mainDisplay.text(data);  
+    };
+    
+    var clear = function () {
+        show(0);   
+    };
+    
+    $('body').on('displayReady' , function (){
+        var displayEvent = $.Event('display');
+    
+        clear();
+        
+        $('body').on('display',function(e,displayType,data){
+            show(data);
+            // display type is advaced. Will implement later
+        });    
+    });
+    
+})();
+
+/*
 var display = function () {
     this.mainDisplay = $('#mainDisplay');
     this.auxilaryDisplay = $('#auxilaryDisplay');
@@ -31,7 +56,7 @@ display.prototype.clearAuxilaryDisplay = function () {
 };
 
 
-/*
+
 $(document).ready(function(){
     var disp = new display();
 
@@ -45,6 +70,8 @@ $(document).ready(function(){
         }
     });    
     
+    
+    
 });
-
 */
+

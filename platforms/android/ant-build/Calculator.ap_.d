@@ -18,6 +18,7 @@
 /home/pavan/android_project/Calculator/platforms/android/assets/www/html \
 /home/pavan/android_project/Calculator/platforms/android/assets/www/index.html \
 /home/pavan/android_project/Calculator/platforms/android/assets/www/cordova_plugins.js \
+/home/pavan/android_project/Calculator/platforms/android/assets/www/plugins \
 /home/pavan/android_project/Calculator/platforms/android/assets/www/templates \
 /home/pavan/android_project/Calculator/platforms/android/assets/www/img \
 /home/pavan/android_project/Calculator/platforms/android/assets/www/index1.html \
@@ -28,6 +29,9 @@
 /home/pavan/android_project/Calculator/platforms/android/assets/www/css/calc.css \
 /home/pavan/android_project/Calculator/platforms/android/assets/www/html/chrome.html \
 /home/pavan/android_project/Calculator/platforms/android/assets/www/html/Calculator.html \
+/home/pavan/android_project/Calculator/platforms/android/assets/www/plugins/com.verso.cordova.clipboard \
+/home/pavan/android_project/Calculator/platforms/android/assets/www/plugins/com.verso.cordova.clipboard/www \
+/home/pavan/android_project/Calculator/platforms/android/assets/www/plugins/com.verso.cordova.clipboard/www/clipboard.js \
 /home/pavan/android_project/Calculator/platforms/android/assets/www/templates/basic.html \
 /home/pavan/android_project/Calculator/platforms/android/assets/www/templates/basicExample.html \
 /home/pavan/android_project/Calculator/platforms/android/assets/www/img/logo.png \
@@ -35,9 +39,9 @@
 /home/pavan/android_project/Calculator/platforms/android/assets/www/img/skulls.png \
 /home/pavan/android_project/Calculator/platforms/android/assets/www/js/index.js \
 /home/pavan/android_project/Calculator/platforms/android/assets/www/js/evaluate.js \
+/home/pavan/android_project/Calculator/platforms/android/assets/www/js/utilities.js \
 /home/pavan/android_project/Calculator/platforms/android/assets/www/js/express.txt \
 /home/pavan/android_project/Calculator/platforms/android/assets/www/js/expressionEvaluator.js \
-/home/pavan/android_project/Calculator/platforms/android/assets/www/js/stack.js \
 /home/pavan/android_project/Calculator/platforms/android/assets/www/js/modes.js \
 /home/pavan/android_project/Calculator/platforms/android/assets/www/js/functions.js \
 /home/pavan/android_project/Calculator/platforms/android/assets/www/js/display.js \
@@ -46,4 +50,5 @@
 /home/pavan/android_project/Calculator/platforms/android/assets/www/js/jquery.js \
 /home/pavan/android_project/Calculator/platforms/android/assets/www/js/key.js \
 /home/pavan/android_project/Calculator/platforms/android/assets/www/js/expressionManager.js \
+/home/pavan/android_project/Calculator/platforms/android/assets/www/js/storage.js \
 /home/pavan/android_project/Calculator/platforms/android/ant-build/AndroidManifest.xml \

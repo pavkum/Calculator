@@ -1,6 +1,108 @@
+var calculator = (function (){
+    var width = $(window).width();
+    var height = $(window).height();
+    
+    function initialize () {
+        $('.container').width(width ); // padding of 2px
+        $('.container').height(height);
+        
+        // reset height and width incase of padding
+        width = $('.container').width();
+        height = $('.container').height();
+        
+        // set Display Height
+        
+        $('#auxilary').height(height * 0.05);
+        $('#auxilary').css('line-height',height * 0.05+'px');
+        
+        $('#mainDisplay').height(height * 0.10);
+        $('#mainDisplay').css('line-height',height * 0.10+'px');
+        
+        $('#scroll').height(height * 0.03);
+        $('#scroll').css('line-height',height * 0.03+'px');
+        
+        // keypad container Height
+        var keypadHeight = (height - ( $('.header').outerHeight() + $('.display').outerHeight() 
+                           + $('.keypad').outerHeight())); // display total height + height of padding
+    
+        $('.keypad').width(width);
+        $('.keypad').height(keypadHeight); // 1% top bottom padding
+        
+        // controls Height
+        $('.controls').height(keypadHeight * 0.10);
+        var cells = $('.controls .cell');
+            
+        for(var i=0; i<cells.length; i++) {
+            var cell = cells.eq(i);
+            cell.height(keypadHeight * 0.10);
+            
+            cell.css('line-height',(keypadHeight * 0.1) + 'px');
+        }
+        
+        // numeric keypad height
+        var elem = $('#keypad');
+    
+        elem.width(width);
+        elem.height(keypadHeight * 0.9);
+        
+        // History Height
+        elem = $('#calculationHistory');
+        
+        elem.width(width);
+        elem.height(keypadHeight * 0.9);
+        
+        // History Item height
+        
+        elem = $('.historyItem');
+        elem.width((width * 0.5) - 1);
+        elem.css('line-height',keypadHeight * 0.9 * 0.2 + 'px');
+        elem.height(keypadHeight * 0.9 * 0.2);
+    }
+    
+    function toggleHistoryAndNumericKeypad () {
+        $('#keypad').toggle();
+        $('#calculationHistory').toggle();
+    }
+    
+    
+    function initializeComponents () {
+        
+        $('body').on('historynumericpad',toggleHistoryAndNumericKeypad);
+        
+        $('body').trigger('keypadReady');
+        $('body').trigger('displayReady');
+        $('body').trigger('expressionManagerReady');
+        $('body').trigger('utilitiesReady');
+    }
+    
+    $(document).ready(function (){
+    //$(document).on('deviceready' , function (){
+        initialize();
+        initializeComponents();
+    }); 
+    
+})();
+
+/*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var calculator = function () {
-    this.modeManager = undefined;
-    this.display = undefined;
 };
 
 calculator.prototype.initialize = function() {
@@ -33,7 +135,6 @@ calculator.prototype.loadMode = function (width,height) {
     $('.keypad').height(keypadHeight); // 1% top bottom padding
         
     $('.controls').height(keypadHeight * 0.10);
-    
     var cells = $('.controls .cell');
         
     for(var i=0; i<cells.length; i++) {
@@ -45,7 +146,14 @@ calculator.prototype.loadMode = function (width,height) {
     }
     
     var elem = $('#keypad');
-    if(!this.modeManager){
+    
+    elem.width(width);
+    elem.height(keypadHeight * 0.9);
+    $('body').trigger('keypadReady');
+    $('body').trigger('modechange',['basic']);
+    
+    
+    /*if(!this.modeManager){
         this.modeManager = new ModeManager(width,(keypadHeight*0.90) ,elem);
     }else{
         this.modeManager.resetSize(width,keypadHeight * 0.85);   
@@ -58,7 +166,7 @@ calculator.prototype.loadMode = function (width,height) {
 
 $(document).ready(function () {
     //if(!window.initialize)
-        initialize();
+        //initialize();
 });
 document.addEventListener('deviceready', function () {
     //if(!window.initialize)
@@ -66,6 +174,7 @@ document.addEventListener('deviceready', function () {
 });
 
 function initialize() {
+    
     var calc = new calculator();
     calc.initialize();  
     
