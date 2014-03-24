@@ -7,8 +7,8 @@ key.prototype.attachHandler = function (elem) {
     // key press event as well
     
     var that = this;
-    //$(elem).on('touchstart',function () {
-    $(elem).click(function (){
+    $(elem).on('touchstart',function () {
+    //$(elem).click(function (){
         that.click();
     });
 }

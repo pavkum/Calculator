@@ -37,7 +37,7 @@ var display = (function (){
         });
         
         mainDisplay.on('scroll',function (event){
-            debugger;
+            
         });
         
         

@@ -11,13 +11,21 @@ var calculator = (function (){
         height = $('.container').height();
         
         // set Display Height
-        $('#mainDisplay').height(height * 0.15);
-        $('#mainDisplay').css('line-height',height * 0.15+'px');
+        
+        $('#auxilary').height(height * 0.05);
+        $('#auxilary').css('line-height',height * 0.05+'px');
+        
+        $('#mainDisplay').height(height * 0.10);
+        $('#mainDisplay').css('line-height',height * 0.10+'px');
+        
+        $('#scroll').height(height * 0.03);
+        $('#scroll').css('line-height',height * 0.03+'px');
         
         // keypad container Height
         var keypadHeight = (height - ( $('.header').outerHeight() + $('.display').outerHeight() 
                            + $('.keypad').outerHeight())); // display total height + height of padding
     
+        $('.keypad').width(width);
         $('.keypad').height(keypadHeight); // 1% top bottom padding
         
         // controls Height
@@ -67,8 +75,8 @@ var calculator = (function (){
         $('body').trigger('utilitiesReady');
     }
     
-    $(document).ready(function (){
-    //$(document).on('deviceready' , function (){
+    //$(document).ready(function (){
+    $(document).on('deviceready' , function (){
         initialize();
         initializeComponents();
     }); 
