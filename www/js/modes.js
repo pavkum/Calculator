@@ -62,9 +62,6 @@ var mode = (function () {
     $('body').on('keypadReady',function () {
         width = elem.width();
         height = elem.height();
-        
-        $('body').trigger('modechange','basic')
-        
     });
 
 })();

@@ -12,8 +12,8 @@ var calculator = (function (){
         
         // set Display Height
         
-        $('#auxilary').height(height * 0.05);
-        $('#auxilary').css('line-height',height * 0.05+'px');
+        $('#auxilary').height(height * 0.03);
+        $('#auxilary').css('line-height',height * 0.03+'px');
         
         $('#mainDisplay').height(height * 0.10);
         $('#mainDisplay').css('line-height',height * 0.10+'px');

@@ -17,40 +17,29 @@ var utilities = (function (){
     var pastEvent = $.Event('paste');
     var historyEvent = $.Event('history');
    
+    var toAuxilary = function(type,data){
+        $('body').trigger('auxilary',[type,data]);
+    };
     
     var copyOnSuccess = function () {
-        copy.text('Copied');
-        
-        setTimeout(function (){
-            copy.text('Copy');
-        },1000);
+        toAuxilary('message','Copied');
     };
     
     var copyOnError = function () {
-        copy.text('Copied');
-        
-        setTimeout(function (){
-            copy.text('Copy');
-        },1000);
+        toAuxilary('message','Copy Error');
     };
     
     var pasteOnSuccess = function (text) {
         // do validation later
         if(!updateExpression(text)){
-            paste.text('Error');
-        
-            setTimeout(function (){
-                paste.text('Paste');
-            },1000);
+            toAuxilary('message','Paste Error : Invalid char');
+        }else{
+            toAuxilary('message','Pasted');   
         }
     };
     
     var pasteOnError = function () {
-        paste.text('Error');
-        
-        setTimeout(function (){
-            paste.text('Paste');
-        },1000);
+        toAuxilary('message','Paste Error');
     };
     
     var updateExpression = function (expression) {
@@ -60,14 +49,16 @@ var utilities = (function (){
            for(var i=0; i<expression.length; i++){
                 $('body').trigger('update',expression.charAt(i));
             }
-           
+            return true;
         }else{
            return false;
         }
     };
     
     var populateHistoryData = function () {
-        var history = window.historyQueue.get().reverse();
+        var history = window.historyQueue.get().slice();
+        
+        history = history.reverse();
         
         //$('.historyItem').text('').show();
         
@@ -98,8 +89,10 @@ var utilities = (function (){
         if(!isHistory){
             populateHistoryData();
             history.text('Keypad');
+            toAuxilary('menu','History');
         }else{
             history.text('History');
+            toAuxilary('menu','');
         }
         
         isHistory = !isHistory;
@@ -126,6 +119,11 @@ var utilities = (function (){
     
     $('body').on('utilitiesReady' , function (){
         window.historyQueue.load();
+        
+        // Mode change is handled by controls in higher versions of calulator
+        $('body').trigger('modechange','basic');
+        
+        //toAuxilary('menu','Calculator');
     });
     
 })();
