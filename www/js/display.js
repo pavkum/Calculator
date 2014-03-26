@@ -94,7 +94,7 @@ var display = (function (){
             }
         });
         
-        mainDisplay.bind('touchmove',function(event){
+        $('.display').bind('touchmove',function(event){
             var x = event.originalEvent.changedTouches[0].clientX;
             touchHandler.prevX = touchHandler.curX;
             touchHandler.curX = x;
@@ -114,7 +114,7 @@ var display = (function (){
                 if(touchHandler.curX > touchHandler.prevX){
                        mainDisplay.scrollLeft(touchHandler.curX - touchHandler.prevX);
                 }else{
-                    mainDisplay.scrollLeft(-touchHandler.curX + touchHandler.prevX)
+                    mainDisplay.scrollLeft(touchHandler.curX)
                 }
                 
                 var curWidth = mainDisplay.prop('scrollWidth');
