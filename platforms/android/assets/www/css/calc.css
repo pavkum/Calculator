@@ -99,7 +99,7 @@ body{
     border-right-color:white;
     color:#2C3E50;
     /*font-size:0.75em;*/
-    font-size:90%;
+    font-size:85%;
 }
 
 sup, sub {
@@ -141,7 +141,7 @@ sup, sub {
     width:30%;
     padding:1.5%;
     text-align:left;
-    font-size:85%;
+    font-size:80%;
     text-transform:uppercase;
 }
 
