@@ -19,7 +19,8 @@ body{
     background:#c0392b;
     font-weight:bold;
     font-style:oblique;
-    font-size:1em;
+    /*font-size:1em;*/
+    font-size:125%;
 }
 
 .display {
@@ -39,7 +40,8 @@ body{
     text-align:right;
     /*height:15%;
     line-height:15%;*/
-    font-size: 2 em;
+    /*font-size: 2 em;*/
+    font-size:125%;
     color:#22313F;
     overflow-x:hidden;
 }
@@ -76,7 +78,7 @@ body{
     cursor:pointer;
     cursor:hand;
     font-weight:bold;
-    font-size:1em;
+    font-size:125%;
     
     border-right:1px solid white;
     border-top:1px solid white;
@@ -96,8 +98,8 @@ body{
     border-right-color:#22313F;
     border-right-color:white;
     color:#2C3E50;
-    font-size:0.75em;
-        
+    /*font-size:0.75em;*/
+    font-size:90%;
 }
 
 sup, sub {
@@ -139,6 +141,10 @@ sup, sub {
     width:30%;
     padding:1.5%;
     text-align:left;
-    font-size:0.5em;
+    font-size:85%;
     text-transform:uppercase;
+}
+
+#scroll {
+    margin:1%;   
 }

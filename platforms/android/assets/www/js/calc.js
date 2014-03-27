@@ -15,8 +15,8 @@ var calculator = (function (){
         $('#auxilary').height(height * 0.03);
         $('#auxilary').css('line-height',height * 0.03+'px');
         
-        $('#mainDisplay').height(height * 0.10);
-        $('#mainDisplay').css('line-height',height * 0.10+'px');
+        $('#mainDisplay').height(height * 0.05);
+        $('#mainDisplay').css('line-height',height * 0.05+'px');
         
         $('#scroll').height(height * 0.03);
         $('#scroll').css('line-height',height * 0.03+'px');
@@ -75,8 +75,8 @@ var calculator = (function (){
         $('body').trigger('utilitiesReady');
     }
     
-    //$(document).ready(function (){
-    $(document).on('deviceready' , function (){
+    $(document).ready(function (){
+    //$(document).on('deviceready' , function (){
         initialize();
         initializeComponents();
     }); 

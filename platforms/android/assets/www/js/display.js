@@ -111,13 +111,16 @@ var display = (function (){
             },1000);
             
             if(touchHandler.curX && touchHandler.prevX){
+                var curWidth = mainDisplay.prop('scrollWidth');
                 if(touchHandler.curX > touchHandler.prevX){
-                       mainDisplay.scrollLeft(touchHandler.curX - touchHandler.prevX);
+                    mainDisplay.scrollLeft(mainDisplay.scrollLeft() - (curWidth / 2.5));
+                       //mainDisplay.scrollLeft(touchHandler.curX - touchHandler.prevX);
                 }else{
-                    mainDisplay.scrollLeft(touchHandler.curX)
+                    mainDisplay.scrollLeft(mainDisplay.scrollLeft() + (curWidth / 2.5));
+                    //mainDisplay.scrollLeft(touchHandler.curX)
                 }
                 
-                var curWidth = mainDisplay.prop('scrollWidth');
+                
                 updateScrollBar(mainDisplay.scrollLeft() , curWidth - displayScrollWidth );
             }
             

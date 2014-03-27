@@ -179,7 +179,9 @@ var expressionManager = (function (){
         $.Event('clearRecent');
         
         $('body').on('evaluate',function(){
+            $('body').trigger('auxilary',['message','Evaluating']);
             evaluate(); 
+            $('body').trigger('auxilary',['message','Result']);
         });
         
         $('body').on('update',function(e,val) {
