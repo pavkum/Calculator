@@ -10,6 +10,12 @@ var calculator = (function (){
         width = $('.container').width();
         height = $('.container').height();
         
+        
+        if(width > height){ // assume as tablet
+            $('.header').css('padding','3%');
+        }
+        
+        
         // set Display Height
         
         $('#auxilary').height(height * 0.03);

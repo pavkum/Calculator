@@ -15,7 +15,7 @@ key.prototype.attachHandler = function (elem) {
 
 key.prototype.click = function () {
         //$('body').trigger('update',this.value);  
-        $('body').trigger('proxy',this.value);  
+        $('body').trigger('display',this.value);  
 };
 
 var clearAll = function() {

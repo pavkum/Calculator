@@ -42,7 +42,7 @@ var utilities = (function (){
         if(!(/[^.\+\-\/\*\^\%\d\(\)\u2200-\u22FF]/.test(expression))){
            
            for(var i=0; i<expression.length; i++){
-                $('body').trigger('update',expression.charAt(i));
+                $('body').trigger('display',expression.charAt(i));
             }
             return true;
         }else{
@@ -57,12 +57,17 @@ var utilities = (function (){
         
         //$('.historyItem').text('').show();
         
-        for(var i = 0; i < history.length; i++){
+        for(var i = 0; i < 10; i++){
             var hisItem = history[i];
             
-            $('#expression'+i).text(hisItem.expression.toString().replace(/,/g ,'')).show();
-            $('#result'+i).text(hisItem.result).show();
+            if(hisItem && hisItem.expression){
+                $('#expression'+i).text(hisItem.expression.toString().replace(/,/g ,'')).css('background','#1E8BC3').css('text-align','left').show();
+                $('#result'+i).text(hisItem.result).show();    
+            }else{
+                 $('#expression'+i).text('No Data').css('background','#19B5FE').css('text-align','right').show();
+            }
         }
+        
         
         /*for(var i = 0; i < 10; i++){
             var hisItem = history[0];
