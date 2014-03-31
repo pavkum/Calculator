@@ -15,8 +15,8 @@ var calculator = (function (){
         $('#auxilary').height(height * 0.03);
         $('#auxilary').css('line-height',height * 0.03+'px');
         
-        $('#mainDisplay').height(height * 0.05);
-        $('#mainDisplay').css('line-height',height * 0.05+'px');
+        $('.mainDisplay>table').height(height * 0.05);
+        //$('#mainDisplay').css('line-height',height * 0.05+'px');
         
         $('#scroll').height(height * 0.03);
         $('#scroll').css('line-height',height * 0.03+'px');
@@ -54,9 +54,9 @@ var calculator = (function (){
         // History Item height
         
         elem = $('.historyItem');
-        elem.width((width * 0.5) - 1);
-        elem.css('line-height',keypadHeight * 0.9 * 0.2 + 'px');
-        elem.height(keypadHeight * 0.9 * 0.2);
+        elem.width(width );
+        elem.css('line-height',keypadHeight * 0.9 * 0.1 * 0.96 - 1 + 'px');
+        elem.height(keypadHeight * 0.9 * 0.1 - 1);
     }
     
     function toggleHistoryAndNumericKeypad () {

@@ -1,8 +1,3 @@
-
-
-
-
-
 var utilities = (function (){
     
     var copy = $('#copy');
@@ -44,7 +39,7 @@ var utilities = (function (){
     
     var updateExpression = function (expression) {
         expression = expression.replace(/ /g,'');
-        if(!(/[^\+\-\/\*\^\%\d\(\)\u2200-\u22FF]/.test(expression))){
+        if(!(/[^.\+\-\/\*\^\%\d\(\)\u2200-\u22FF]/.test(expression))){
            
            for(var i=0; i<expression.length; i++){
                 $('body').trigger('update',expression.charAt(i));
@@ -76,16 +71,16 @@ var utilities = (function (){
         }*/
     };
     
-    copy.on('touchstart', function (){
-        cordova.plugins.clipboard.copy($('#mainDisplay').text(),copyOnSuccess,copyOnError); // dont directly use main display here
+    copy.on('click', function (){
+        cordova.plugins.clipboard.copy($('div#mainDisplay').text(),copyOnSuccess,copyOnError); // dont directly use main display here
         
     });
     
-    paste.on('touchstart', function (){
+    paste.on('click', function (){
         cordova.plugins.clipboard.paste(pasteOnSuccess,pasteOnError);
     });
     
-    history.on('touchstart', function (){
+    history.on('click', function (){
         if(!isHistory){
             populateHistoryData();
             history.text('Keypad');

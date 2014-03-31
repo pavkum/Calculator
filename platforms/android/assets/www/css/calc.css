@@ -14,11 +14,11 @@ body{
 }
 
 .header {
-    padding:3% 5%;
+    padding: 5%;
     color:#ecf0f1;
-    background:#c0392b;
+    /*background:#c0392b;*/
+    background:#34495E;
     font-weight:bold;
-    font-style:oblique;
     /*font-size:1em;*/
     font-size:125%;
 }
@@ -33,7 +33,62 @@ body{
     margin:0 5%;
 }
 
+.mainDisplay {
+    /*margin:0 5%;*/
+    //max-width:90%;
+    text-align:right;
+    font-size:125%;
+    color:#22313F;
+    overflow:hidden;
+    clear:both;
+}
+
+#scrollLeft , #scrollRight{
+    width:5%;
+    /*background:#ddd;*/
+    visibility:hidden;
+    text-align:center;
+}
+
 #mainDisplay {
+    height:100%;
+    overflow:hidden;
+}
+
+.displayCell {
+    //height:100%;
+    float:right;
+    
+    /*background:yellow;*/
+    padding:3px;
+    margin:0px;
+    border:1px solid #FAFAFA;
+    display:none;
+}
+
+.cursor {
+    border-right:1px solid #ddd;   
+}
+
+.visible {
+    display:block;   
+}
+
+.mainDisplay>input{
+    width:100%;
+    height:100%;
+    border:0;
+    background:#FAFAFA;
+    text-align:right;
+}
+
+.mainDisplay>input:focus{
+    border:0;
+    outline:0;
+}
+
+
+#mainDisplayOLD {
     margin:0 5%;
     max-width:90%;
     /*background:white; */ 
@@ -75,6 +130,7 @@ body{
     text-align:center;
     background:#19B5FE;
     color:#ecf0f1;
+    
     cursor:pointer;
     cursor:hand;
     font-weight:bold;
@@ -91,13 +147,15 @@ body{
 }
 
 .controlKeys {
-    background:#F7CA18;
+    /*background:#F7CA18;*/
+    background:#2574A9;
     border-top:0;
     border-bottom:0;
     /*border-top-color:#22313F;*/
     border-right-color:#22313F;
     border-right-color:white;
-    color:#2C3E50;
+    /*color:#2C3E50;*/
+    color:#ECF0F1;
     /*font-size:0.75em;*/
     font-size:85%;
 }
@@ -109,31 +167,45 @@ sup, sub {
 }
 
 .historyItem {
+    
     /*width:50%;*/
     /*display:none;*/
-    float:left;
+    /*float:left;*/
     border:0;
-    border-right:1px solid white;
+    /*border-right:1px solid white;
+    border-top:1px solid white;*/
     border-top:1px solid white;
+    /*background:#FAFAFA;*/
 }
 
-.historyItem div {
+.index, .expression, .result {
+    /*margin:2% 1%;
+    height:96%;*/
+    height:100%;
     float:left;
+    text-align:left;
+}
+
+.index {
+    width:10%;   
+    background:#2574A9;
+    text-align:center;
 }
 
 .expression {
-    padding:0 5%;
-    width:50%;
-    text-align:left;
+    background:#1E8BC3;
+    padding:0 2%;
+    width:46%;
+    /*text-align:left;*/
     overflow-x:hidden;
+    /*border-left:1px solid white;
+    border-right:1px solid white;*/
 }
 
 .result {
+    padding:0 2%;
+    width:36%;
     overflow-x:hidden;
-}
-
-.historyItem:last-child {
-    width:40%;   
 }
 
 .auxilaryData {
@@ -143,6 +215,7 @@ sup, sub {
     text-align:left;
     font-size:80%;
     text-transform:uppercase;
+    overflow-x:hidden;
 }
 
 #scroll {

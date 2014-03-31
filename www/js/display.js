@@ -8,12 +8,81 @@ var display = (function (){
     var menu = $('#menu');
     
     var messageTimer = undefined;
+    var displayScrollHeight = 0;
     
-    var displayScrollWidth = 0;
+    var prependPos = mainDisplay;    
     
-    var show = function (data) {
-        mainDisplay.text(data);  
+    var addToDisplay = function (value) {
+        
+        scrollToCursor();
+        
+        if(prependPos === mainDisplay){
+            prependPos.html('');
+            prependPos.prepend("<div class='displayCell cursor'>"+value+"</div>");
+            unitWidth = 0;
+            prependPos = mainDisplay.children().eq(0);
+            
+        }else{
+            prependPos.removeClass('cursor');
+            prependPos.before("<div class='displayCell cursor'>"+value+"</div>");
+            prependPos = prependPos.prev();
+        }
+        
+        prependPos.addClass('visible');
+    
+        if(isOverflow()){ // when new elem is added
+            mainDisplay.find('.visible').last().removeClass('visible');
+        }
+          
         updateScrollInfo();
+    };
+    
+    var scrollToCursor = function () {
+        if(!prependPos.is(':visible')){
+            
+            var index = mainDisplay.find('.cursor').index();
+            
+            if(index < mainDisplay.find('.visible').first().index()){
+                
+                var diff = mainDisplay.find('.visible').first().index();
+                
+                for(var i=0; i< diff; i++){
+                    displayScrollLeft();
+                }
+            }else{
+                
+                var diff = mainDisplay.find('.visible').last().index();
+                
+                for(var i=0; i< diff; i++){
+                    displayScrollRight();
+                }
+            }
+        }
+    };
+    
+    var displayScrollLeft = function () {
+        var prev = mainDisplay.find('.visible').first().prev();
+        if(prev.length > 0){
+            prev.addClass('visible');
+            mainDisplay.find('.visible').last().removeClass('visible');       
+        }   
+    };
+    
+    var displayScrollRight = function () {
+        var next = mainDisplay.find('.visible').last().next();
+        if(next.length > 0){
+            next.addClass('visible');     
+            mainDisplay.find('.visible').first().removeClass('visible');
+        }
+    };
+    
+    var isOverflow = function () {
+        var currScrollHeight = mainDisplay.prop('scrollHeight');
+        
+        if(currScrollHeight > displayScrollHeight)
+            return true;
+        else
+            return false;
     };
     
     var touchHandler = {};
@@ -22,57 +91,63 @@ var display = (function (){
     touchHandler.timer = undefined;
     
     var updateScrollInfo = function () {
-        var curWidth = mainDisplay.prop('scrollWidth');
-                
-        if(curWidth > displayScrollWidth){ // always show current entered element
-            mainDisplay.scrollLeft(curWidth - displayScrollWidth);
+        if(mainDisplay.find('.visible').last().next().length > 0){
+            scrollLeft.css('visibility','visible'); 
+        }else{
+            scrollLeft.css('visibility','hidden'); 
         }
         
-        updateScrollBar(mainDisplay.scrollLeft() , curWidth - displayScrollWidth);
-    };
-    
-    var updateScrollBar = function (pscrollLeft, pscrollPos) {
-        if(pscrollLeft > 0 && pscrollPos > 0 && pscrollPos == pscrollLeft){ // extreme right
-            scrollLeft.hide();
-            scrollRight.show();
-        }else if(pscrollLeft === 0){ // extreme left
-            // 2 cases - no scroll bar and extreme right scrollbar
-            if(pscrollPos > 0){ // scrolled to extreme left but lengthy data
-                scrollRight.hide();
-                scrollLeft.show();
-            }else{ // no scroll
-                scrollLeft.hide();
-                scrollRight.hide();
-            }
-        }else{// lengthy data and some where in between, make both scrolls visible
-            scrollLeft.show();
-            scrollRight.show();
+        if(mainDisplay.find('.visible').first().prev().length > 0){
+            scrollRight.css('visibility','visible'); 
+        }else{
+            scrollRight.css('visibility','hidden'); 
         }
+        
     };
     
     var clear = function () {
-        show(0);   
+        mainDisplay.html('<div class="displayCell visible">&nbsp;</div>');
+        prependPos = mainDisplay;
+        
+        updateScrollInfo();
+    };
+    
+    var clearRecent = function () {
+        if(prependPos && prependPos.next().length != 0){
+            var elem = prependPos;
+            prependPos = prependPos.next();
+            
+            if(prependPos.length == 0){
+                prependPos = mainDisplay.children().eq(0);
+            }
+            prependPos.addClass('cursor');
+            
+            elem.remove();
+            
+            if(mainDisplay.children().length === 0){
+                prependPos = mainDisplay;   
+            }
+            mainDisplay.find('.visible').last().next().addClass('visible');
+        }
     };
     
     $('body').on('displayReady' , function (){
         var displayEvent = $.Event('display');
-        displayScrollWidth = mainDisplay.prop('scrollWidth');
+        displayScrollHeight = mainDisplay.prop('scrollHeight');
         
         clear();
         
         
-        $('body').on('display',function(e,displayType,data){
-            show(data);
+        $('body').on('display',function(e,value){
+            addToDisplay(value);
             // display type is advaced. Will implement later
         });
         
-        mainDisplay.on('scroll',function (event){
-            
-            var curWidth = mainDisplay.prop('scrollWidth');
-            
-            updateScrollBar(mainDisplay.scrollLeft() , curWidth - displayScrollWidth );
+        $('body').on('result',function (event,value){
+            addToDisplay(value);
+            prependPos = mainDisplay;
         });
-        
+                
         $('body').on('auxilary', function (event, type, data){
             if(type === 'message'){
                 
@@ -94,8 +169,25 @@ var display = (function (){
             }
         });
         
-        $('.display').bind('touchmove',function(event){
+        $('body').on('clear',function(){
+            clear();
+        });
+        
+        $('body').on('clearRecent',function(){
+            clearRecent(); 
+        });
+        
+        mainDisplay.bind('click',function (event){
+            if(prependPos != mainDisplay){
+                prependPos.removeClass('cursor');
+                prependPos = $(event.target);
+                prependPos.addClass('cursor');    
+            }
+        });
+        
+        mainDisplay.bind('touchmove',function(event){
             var x = event.originalEvent.changedTouches[0].clientX;
+            //var x = event.clientX;
             touchHandler.prevX = touchHandler.curX;
             touchHandler.curX = x;
             
@@ -111,21 +203,26 @@ var display = (function (){
             },1000);
             
             if(touchHandler.curX && touchHandler.prevX){
-                var curWidth = mainDisplay.prop('scrollWidth');
-                if(touchHandler.curX > touchHandler.prevX){
-                    mainDisplay.scrollLeft(mainDisplay.scrollLeft() - (curWidth / 2.5));
-                       //mainDisplay.scrollLeft(touchHandler.curX - touchHandler.prevX);
+            
+                if(touchHandler.curX >= touchHandler.prevX){//scroll right
+                    displayScrollRight();
                 }else{
-                    mainDisplay.scrollLeft(mainDisplay.scrollLeft() + (curWidth / 2.5));
-                    //mainDisplay.scrollLeft(touchHandler.curX)
+                    displayScrollLeft();
                 }
-                
-                
-                updateScrollBar(mainDisplay.scrollLeft() , curWidth - displayScrollWidth );
+                updateScrollInfo();
             }
             
             event.preventDefault();
-            //$('body').trigger('auxilary',['message',x]);
+        });
+        
+        $('body').on('screen',function(event){
+            var d = $.Deferred();
+            
+            var data = {};
+            
+            data.message = mainDisplay.text().split('').reverse();
+            d.resolve(data);
+            return d;
         });
         
     });

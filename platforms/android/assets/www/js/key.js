@@ -7,14 +7,15 @@ key.prototype.attachHandler = function (elem) {
     // key press event as well
     
     var that = this;
-    $(elem).on('touchstart',function () {
-    //$(elem).click(function (){
+    //$(elem).on('touchstart',function () {
+    $(elem).click(function (){
         that.click();
     });
 }
 
 key.prototype.click = function () {
-        $('body').trigger('update',this.value);  
+        //$('body').trigger('update',this.value);  
+        $('body').trigger('proxy',this.value);  
 };
 
 var clearAll = function() {

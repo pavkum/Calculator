@@ -171,8 +171,6 @@ var expressionManager = (function (){
     
     $('body').on('expressionManagerReady', function (){
         
-        
-        
         $.Event('evaluate');
         $.Event('update');
         $.Event('clear');
@@ -188,13 +186,7 @@ var expressionManager = (function (){
             update(val);
         });
         
-        $('body').on('clear',function(){
-            clear();
-        });
         
-        $('body').on('clearRecent',function(){
-            clearRecent(); 
-        });
     
     });    
 
