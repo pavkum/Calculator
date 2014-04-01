@@ -26,6 +26,7 @@ var expressionManager = (function (){
             if(isNaN(exp)){
                 
                 if(exp.indexOf('@exp') != -1){
+                    
                     // expression
                     finalExpression += '(' + prepareExpression(expressionStore[exp.substr(5,exp.length)].getExpression()) + ')';
                 }else if(exp.match('[+*-/]')){ // operators
@@ -56,6 +57,12 @@ var expressionManager = (function (){
                         
                         functionStart = true;
                     } else { // root
+                        
+                        var lastChar = finalExpression.charAt(finalExpression.length - 1);
+                        
+                        if(!isNaN(lastChar)){ // operators or braces
+                            finalExpression += '*';   
+                        }
                         finalExpression += 'Math.sqrt(' ;
                         
                         functionStart = true;
@@ -71,6 +78,7 @@ var expressionManager = (function (){
         
         if(functionStart)
             finalExpression += ')';
+        
         
         return finalExpression;
     };
@@ -150,14 +158,36 @@ var expressionManager = (function (){
         active.complete();
         active = new window.bodmosExpression();
         
-        show('main',0);
+    };
+    
+    var postProcessExpression = function (expression){
+        var newExpression = '';
+        
+        for(var i=0; i<expression.length; i++){
+            var c = expression.charAt(i);
+            
+            if(c === '('){
+                var lastChar = newExpression.charAt(newExpression.length - 1);
+                
+                if(!isNaN(lastChar)){ // if number
+                       newExpression += '*';
+                }
+            }
+            
+            newExpression += c;
+        }
+        
+        return newExpression;
     };
     
     var evaluate = function () {
         
         var val;
         try{
-            val = eval(prepareExpression(active.getExpression()));
+            
+            
+            
+            val = eval(postProcessExpression(prepareExpression(active.getExpression())));
             
             if(!val)
                 throw 'Error';
@@ -170,7 +200,9 @@ var expressionManager = (function (){
         
         var promise = $.Deferred();
         
-        promise.done($('body').trigger('clear'),$('body').trigger('result',val));
+        promise.done($('body').trigger('clear'),$('body').trigger('result',[val + '']),clear());
+        
+        
     };
     
     $('body').on('expressionManagerReady', function (){

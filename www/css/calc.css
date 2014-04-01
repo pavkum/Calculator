@@ -29,8 +29,9 @@ body{
         
 }
 
-#scroll, #auxilary {
+#auxilary {
     margin:0 5%;
+    overflow:hidden;
 }
 
 .mainDisplay {
@@ -219,6 +220,7 @@ sup, sub {
     text-transform:uppercase;
     overflow-x:hidden;
     color:#22A7F0;
+    text-overflow:ellipsis;
 }
 
 #scroll {

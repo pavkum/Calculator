@@ -51,3 +51,8 @@ var historyQueue = {
     }
     
 };
+
+var constants = {
+    keyListenEventType : 'touchstart',
+    moveEventType : 'touchmove',
+};

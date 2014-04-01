@@ -27,7 +27,7 @@ var utilities = (function (){
     var pasteOnSuccess = function (text) {
         // do validation later
         if(!updateExpression(text)){
-            toAuxilary('message','Paste Error : Invalid char');
+            toAuxilary('message','Invalid char');
         }else{
             toAuxilary('message','Pasted');   
         }
@@ -68,24 +68,30 @@ var utilities = (function (){
             }
         }
         
-        
-        /*for(var i = 0; i < 10; i++){
-            var hisItem = history[0];
-            
-            $('#item'+i).text(hisItem.expression).show();
-        }*/
     };
     
-    copy.on('click', function (){
-        cordova.plugins.clipboard.copy($('div#mainDisplay').text(),copyOnSuccess,copyOnError); // dont directly use main display here
+    copy.on(constants.keyListenEventType, function (){
+        
+        var data = $('#mainDisplay').text().split('').reverse(); // as of now. Use deferred
+        var text = '';    
+        for(var i=0; i<data.length; i++){
+            text += data[i];
+        }
+        text = text.trim();
+        if(text === ''){
+            toAuxilary('message','Empty'); 
+            return;
+        }
+        
+        cordova.plugins.clipboard.copy(text,copyOnSuccess,copyOnError); // dont directly use main display here
         
     });
     
-    paste.on('click', function (){
+    paste.on(constants.keyListenEventType, function (){
         cordova.plugins.clipboard.paste(pasteOnSuccess,pasteOnError);
     });
     
-    history.on('click', function (){
+    history.on(constants.keyListenEventType, function (){
         if(!isHistory){
             populateHistoryData();
             history.text('Keypad');
@@ -108,7 +114,7 @@ var utilities = (function (){
         window.historyQueue.push(obj);
     });
     
-    $('.historyItem').on('touchstart',function (event){
+    $('.historyItem').on(constants.keyListenEventType,function (event){
         var expressionElem = $(event.currentTarget).find('.expression');
         
         $('body').trigger('clear');// put it in jquery deferred;

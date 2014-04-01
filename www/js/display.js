@@ -113,22 +113,38 @@ var display = (function (){
     };
     
     var clearRecent = function () {
-        if(prependPos && prependPos.next().length != 0){
-            var elem = prependPos;
-            prependPos = prependPos.next();
+        
+        scrollToCursor();
+        
+        if(prependPos != mainDisplay){
+            var elem = prependPos.next();
             
-            if(prependPos.length == 0){
-                prependPos = mainDisplay.children().eq(0);
+            prependPos.remove();
+            
+            var childrenLength = mainDisplay.children().length;
+            
+            if(elem.length === 0 && childrenLength != 0){
+                elem = mainDisplay.children().eq(0);
+                
+            }else if(childrenLength === 0){
+                clear();
+                return;
+            }else{
+                var next = mainDisplay.find('.visible').last().next();
+                if(next.length > 0){
+                    next.addClass('visible');   
+                }
             }
-            prependPos.addClass('cursor');
             
-            elem.remove();
+            elem.addClass('cursor');
             
-            if(mainDisplay.children().length === 0){
-                prependPos = mainDisplay;   
-            }
-            mainDisplay.find('.visible').last().next().addClass('visible');
+            prependPos = elem;
+            scrollToCursor();
+            updateScrollInfo();
+        }else{
+            clear();   
         }
+        
     };
     
     $('body').on('displayReady' , function (){
@@ -144,7 +160,9 @@ var display = (function (){
         });
         
         $('body').on('result',function (event,value){
-            addToDisplay(value);
+            for(var i=0; i<value.length; i++){
+                addToDisplay(value.charAt(i));   
+            }
             prependPos = mainDisplay;
         });
                 
@@ -177,7 +195,7 @@ var display = (function (){
             clearRecent(); 
         });
         
-        mainDisplay.bind('click',function (event){
+        mainDisplay.bind(constants.keyListenEventType,function (event){
             if(prependPos != mainDisplay){
                 prependPos.removeClass('cursor');
                 prependPos = $(event.target);
@@ -185,7 +203,7 @@ var display = (function (){
             }
         });
         
-        mainDisplay.bind('touchmove',function(event){
+        mainDisplay.bind(constants.moveEventType,function(event){
             var x = event.originalEvent.changedTouches[0].clientX;
             //var x = event.clientX;
             touchHandler.prevX = touchHandler.curX;

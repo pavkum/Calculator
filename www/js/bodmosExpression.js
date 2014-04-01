@@ -83,6 +83,5 @@ bodmosExpression.prototype.open = function () {
 };
 
 bodmosExpression.prototype.getExpression = function () {
-    console.log(this.expression)
     return this.expression.split(window.SEPERATOR);  
 };
