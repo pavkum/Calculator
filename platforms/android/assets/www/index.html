@@ -14,7 +14,7 @@
         
         <div class="container">
             <div class="header">
-                Calculator
+                Basic Calculator
             </div>
             <div class="display">
                 <div id="auxilary">
@@ -46,34 +46,27 @@
                         </tr>
                     </table>
                     <div style="clear:both"></div>
-                    <!--<div id="scrollLeft"></div>
-                    
-                    <div id="scrollRight"></div>-->
-                    <!--<input id="mainDisplay">-->
                 </div>
-                <!--<div id="scroll">
-                    <div id="scrollLeft" style="text-align:left;float:left;display:none"> &lt; </div>
-                    <div id="scrollRight" style="text-align:right;display:none"> &gt; </div>
-                </div>-->
             </div>
             <div class="keypad">
                 <div class="controls">
-                    <div class="cell" data-cell-width="1.5" style="width:25%">
-                        <div id="copy" class="key controlKeys">
-                            Copy
+                    <div class="row">
+                        <div class="cell" data-cell-width="1.5" style="width:25%">
+                            <div id="copy" class="key controlKeys">
+                                Copy
+                            </div>
+                        </div>
+                        <div class="cell" data-cell-width="1.5" style="width:25%">
+                            <div id="paste" class="key controlKeys">
+                                Paste
+                            </div>
+                        </div>
+                        <div class="cell" data-cell-width="3"  style="width:50%">
+                            <div id="history" class="key controlKeys">
+                                History
+                            </div>
                         </div>
                     </div>
-                    <div class="cell" data-cell-width="1.5" style="width:25%">
-                        <div id="paste" class="key controlKeys">
-                            Paste
-                        </div>
-                    </div>
-                    <div class="cell" data-cell-width="3"  style="width:50%">
-                        <div id="history" class="key controlKeys">
-                            History
-                        </div>
-                    </div>
-                    
                 </div>
                 <div id="keypad"></div>
                 <div id="calculationHistory" style="display:none">
@@ -152,14 +145,7 @@
         
         
             <script type="text/javascript" src="cordova.js"></script>
-            <script type="text/javascript" src="js/storage.js"></script>    
-            <script type="text/javascript" src="js/utilities.js"></script>
-            <script type="text/javascript" src="js/display.js"></script>
-            <script type="text/javascript" src="js/bodmosExpression.js"></script>    
-            <script type="text/javascript" src="js/expressionManager.js"></script>
-            <script type="text/javascript" src="js/key.js"></script>
-            <script type="text/javascript" src="js/modes.js"></script>
-            <script type="text/javascript" src="js/calc.js"></script>
+            <script type="text/javascript" src="js/data.js"></script>    
     </body>
 
 </html>
