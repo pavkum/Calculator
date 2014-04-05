@@ -62,7 +62,7 @@ body{
     float:right;
     
     /*background:yellow;*/
-    padding:3px;
+    padding:1px;
     margin:0px;
     border:1px solid #FAFAFA;
     display:none;
@@ -181,7 +181,7 @@ sup, sub {
     padding:0 2%;
     width:46%;
     /*text-align:left;*/
-    overflow-x:hidden;
+    overflow:hidden;
     /*border-left:1px solid white;
     border-right:1px solid white;*/
 }

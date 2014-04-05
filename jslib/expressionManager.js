@@ -3,17 +3,88 @@ var expressionManager = (function (){
     var functionStore = [];
     
     var displayExpression = '';
-    
-    var show = function (displayType, value) {
-        $('body').trigger('display',[displayType,value]);
-    };
-    
+        
     var active = new window.bodmosExpression();
     
     expressionStore[active.getID()] = active;
     
     var getExpressionFromId = function(id) {
         return '@exp#'+id;  
+    };
+    
+    var evaluateExpression = function (expression) {
+        var finalExpression = '';
+        var functionStart = 0;
+        
+        for(var i=0; i<expression.length; i++){
+            var exp = expression[i];
+            
+            switch(exp){
+                    case exp.match(/[\d]/) && exp.match(/[\d]/)[0] : 
+                        finalExpression += exp;
+                        
+                        if(expression[i+1] && expression[i+1].indexOf('@exp') != -1){
+                            finalExpression += '*';
+                        }
+                    
+                        break;
+                    
+                    case '.' :
+                        finalExpression += exp;
+                        break;
+                    
+                    case exp.match('[+*-/]') && exp.match('[+*-/]')[0] :
+                        finalExpression += exp;
+                        break;
+                    case '%' :
+                        finalExpression += '/100';
+                        break;
+                    case '^' :
+                        
+                        var tempExpression = '';
+                        var j;
+                                                                
+                        for(j = finalExpression.length - 1; j >= 0; j--) {
+                            if(!isNaN(finalExpression.charAt(j)) || finalExpression.charAt(j) === '.'){
+                                tempExpression = finalExpression.charAt(j) + tempExpression;
+                            }else{
+                                break;
+                            }
+                        }
+                        finalExpression = finalExpression.substr(0, j + 1);
+                        finalExpression += 'Math.pow(' + tempExpression + ',' ;
+                        functionStart += 1;
+                        break;
+                    
+                    case exp.match(/\u221A/) && exp.match(/\u221A/)[0]:
+
+                        var lastChar = finalExpression.charAt(finalExpression.length - 1);
+                        if(lastChar && lastChar!= '' && !isNaN(lastChar)){ // operators or braces
+                            finalExpression += '*';   
+                        }
+                        finalExpression += 'Math.sqrt(' ;
+                        functionStart += 1;
+                        
+                        break;
+                    case exp.match(/@exp#\d+/) && exp.match(/@exp#\d+/)[0]: // expression
+                        finalExpression += evaluateExpression(expressionStore[exp.substr(5,exp.length)].getExpression());
+                        
+                        if(expression[i+1] && (expression[i+1].indexOf('@exp') != -1 || expression[i+1].match(/\d/))){
+                            finalExpression += '*';
+                        }
+                    
+                        break;
+            }
+        }
+        
+        for(var i=0; i<functionStart; i++){
+            finalExpression += ')';
+        }
+                    
+        
+        finalExpression = eval(finalExpression);
+        return finalExpression;
+        
     };
     
     var prepareExpression = function (expression) {
@@ -28,7 +99,7 @@ var expressionManager = (function (){
                 if(exp.indexOf('@exp') != -1){
                     
                     // expression
-                    finalExpression += '(' + prepareExpression(expressionStore[exp.substr(5,exp.length)].getExpression()) + ')';
+                    finalExpression +=  prepareExpression() ;
                 }else if(exp.match('[+*-/]')){ // operators
                     
                     if(functionStart)
@@ -43,8 +114,21 @@ var expressionManager = (function (){
                     }else if(exp === '^'){ // power
                         var tempExpression = '';
                         var j;
+                                                
                         for(j = finalExpression.length - 1; j >= 0; j--) {
+                            
                             if(!isNaN(finalExpression.charAt(j))){
+                            
+                            /*if((!isNaN(finalExpression.charAt(j)) || finalExpression.charAt(j) === ')' || finalExpression.charAt(j) === '(') && !isClosed){
+                                if(finalExpression.charAt(j) === ')'){
+                                    isClosed = false;
+                                    openBraces = openBraces + 1;
+                                }else if(finalExpression.charAt(j) === '('){
+                                    openBraces = openBraces - 1;
+                                    if(openBraces == 0){
+                                        isClosed = true;   
+                                    }
+                                }*/
                                 tempExpression = finalExpression.charAt(j) + tempExpression;
                             }else{
                                 break;
@@ -59,7 +143,6 @@ var expressionManager = (function (){
                     } else { // root
                         
                         var lastChar = finalExpression.charAt(finalExpression.length - 1);
-                        
                         if(!isNaN(lastChar)){ // operators or braces
                             finalExpression += '*';   
                         }
@@ -79,7 +162,9 @@ var expressionManager = (function (){
         if(functionStart)
             finalExpression += ')';
         
-        
+        console.log(finalExpression);
+        finalExpression = eval(finalExpression);
+        console.log(finalExpression);
         return finalExpression;
     };
     
@@ -111,45 +196,6 @@ var expressionManager = (function (){
         //show('main',displayExpression);
     };
 
-    var clearRecent = function () {
-        var length = displayExpression.length;
-        var lastChar = displayExpression.charAt(length - 1);
-        
-        displayExpression = displayExpression.substr(0,length - 1);
-        
-        if(lastChar === ')'){
-            var previousExpression = active.getLastExpression();
-            
-            if(previousExpression) {
-                previousExpression = expressionStore[previousExpression];
-                
-                window.stack.push(active);
-                previousExpression.open();
-                active = previousExpression;
-            }
-            
-        }else if(lastChar === '('){
-            
-            var lastExpression = getExpressionFromId(active.getID()) ;
-            
-            active.clear();
-            
-            active = window.stack.pop();
-            
-            active.clearRecent(lastExpression);
-            
-        }else{
-            active.clearRecent(lastChar);    
-        }
-        //this.active.clearRecent(lastChar);
-        if(length - 1 === 0 || length === 0){
-            show('main',0);
-        }else{
-            show('main',displayExpression);    
-        }
-        
-    };
-    
     var clear = function () {
         window.stack.reset();
         expressionStore = [];
@@ -161,6 +207,7 @@ var expressionManager = (function (){
     };
     
     var postProcessExpression = function (expression){
+        expression = expression + '';
         var newExpression = '';
         
         for(var i=0; i<expression.length; i++){
@@ -192,15 +239,15 @@ var expressionManager = (function (){
         var val;
         try{
             
-            val = eval(postProcessExpression(prepareExpression(active.getExpression())));
-            
+            //val = postProcessExpression(prepareExpression(active.getExpression()));
+            val = evaluateExpression(active.getExpression());
             if(!val)
                 throw 'Error';
             
             $('body').trigger('addToHistory',[his,val]);
             
         }catch(Error){
-            val = 'Error';
+            val = 'Invalid Expression';
         }
         
         var promise = $.Deferred();

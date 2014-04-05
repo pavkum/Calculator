@@ -178,10 +178,15 @@ var display = (function (){
         });
         
         $('body').on('result',function (event,value){
+            
             for(var i=0; i<value.length; i++){
                 addToDisplay(value.charAt(i));   
             }
-            prependPos = mainDisplay;
+            
+            if(value == 'Infinity' || value == 'Invalid Expression'){
+                prependPos = mainDisplay;    
+            }
+            
         });
                 
         $('body').on('auxilary', function (event, type, data){

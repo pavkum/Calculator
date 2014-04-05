@@ -25,7 +25,12 @@ var utilities = (function (){
     };
     
     var pasteOnSuccess = function (text) {
-        // do validation later
+        
+        if(!text || text === ''){
+            toAuxilary('message','Empty');
+            return;
+        }
+        
         if(!updateExpression(text)){
             toAuxilary('message','Invalid char');
         }else{
