@@ -5,6 +5,10 @@ body{
     margin:0;
     padding:0;
     overflow:hidden;
+
+    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none;       
 }
 
 .container {
