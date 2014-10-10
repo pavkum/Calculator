@@ -1,3 +1,0 @@
-# view AndroidManifest.xml #generated:5
--keep class com.pavan.calculator.Calculator { <init>(...); }
-
